@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wordpress-ingress
+  namespace: wp-ns
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:eu-west-1:019050461780:certificate/58fb855f-482d-4771-ac71-2555c16427f7"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: wordpress.highazvendor.link
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wordpress-service
+            port:
+              number: 80
+  - host: www.wordpress.highazvendor.link
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: wordpress-service
+            port:
+              number: 80
