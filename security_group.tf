@@ -1,3 +1,9 @@
+# Ce code Terraform récupère des informations sur un cluster EKS existant et un groupe de sécurité, puis crée un nouveau groupe de sécurité pour une instance RDS. 
+# Les informations sur le cluster EKS sont récupérées en fonction de var.eks_cluster_name. 
+# Les informations sur le groupe de sécurité existant sont récupérées dans le VPC spécifié par var.vpc_id. 
+# Un nouveau groupe de sécurité chok-sg-rds-wordpress est créé dans le même VPC. 
+# Ce groupe de sécurité permet le trafic TCP sur le port 3306 à partir du groupe de sécurité du cluster EKS, et permet tout le trafic sortant vers n'importe quelle adresse IP.
+
 data "aws_eks_cluster" "chok_cluster" {
   name = var.eks_cluster_name
 }
@@ -32,118 +38,3 @@ resource "aws_security_group" "chok_sg_rds" {
 
 
 }
-
-
-
-/* resource "aws_security_group" "chok_sg_lb" {
-  name        = "chok-sg-lb-wordpress"
-  description = "SG for Load Balancer"
-  vpc_id      = var.vpc_id
-
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-} */
-
-/* resource "aws_security_group" "chok_sg_eks" {
-  name        = "chok-sg-eks"
-  description = "SG for EKS"
-  vpc_id      = var.vpc_id
-
-  # Autoriser le trafic HTTP entrant
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Autoriser le trafic HTTPS entrant
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Autoriser le trafic sortant vers Internet
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  # Autoriser le trafic entrant sur le port de la base de données (ex: MariaDB/MySQL)
-  ingress {
-    from_port       = 3306
-    to_port         = 3306
-    protocol        = "tcp"
-    security_groups = [aws_security_group.chok_sg_rds.id] # Assurez-vous que c'est le bon ID de groupe de sécurité pour RDS
-  }
-
-  # Autoriser le trafic entrant pour le contrôle et la gestion du cluster EKS
-  ingress {
-    from_port       = 1025
-    to_port         = 65535
-    protocol        = "tcp"
-    security_groups = [aws_security_group.chok_sg_eks_nodes.id] # Assurez-vous que c'est le bon ID de groupe de sécurité pour les nœuds EKS
-  }
-} */
-
-/* 
-resource "aws_security_group" "chok_sg_eks_nodes" {
-  name        = "chok-sg-eks-nodes-wordpress"
-  description = "SG for EKS nodes"
-  vpc_id      = var.vpc_id
-
-  # Autorise le trafic HTTP entrant depuis le Load Balancer
-  ingress {
-    from_port       = 80
-    to_port         = 80
-    protocol        = "tcp"
-    security_groups = [aws_security_group.chok_sg_lb.id]
-  }
-
-  # Autorise le trafic HTTPS entrant depuis le Load Balancer
-  ingress {
-    from_port       = 443
-    to_port         = 443
-    protocol        = "tcp"
-    security_groups = [aws_security_group.chok_sg_lb.id]
-  }
-
-  # Autorise le trafic NodePort (si utilisé)
-  ingress {
-    from_port       = 30000
-    to_port         = 32767
-    protocol        = "tcp"
-    security_groups = [aws_security_group.chok_sg_lb.id]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-} */
-
-

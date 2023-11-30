@@ -1,3 +1,7 @@
+# Ce fichier YAML définit un Service Kubernetes ingress-nginx-controller dans le namespace ingress-nginx. 
+# Le service, de type LoadBalancer, expose les ports 80 et 443 pour le trafic HTTP et HTTPS. 
+# Il sélectionne les Pods avec les étiquettes spécifiées dans le selector.
+
 apiVersion: v1
 kind: Service
 metadata:

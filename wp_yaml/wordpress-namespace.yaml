@@ -1,3 +1,7 @@
+# Ce fichier YAML crée un Namespace Kubernetes nommé wp-ns. 
+# Un Namespace est une couche d'isolation qui permet de diviser les ressources d'un cluster entre plusieurs utilisateurs ou équipes. Une fois ce fichier appliqué, 
+# un nouveau Namespace wp-ns sera créé dans le cluster.
+
 # création du namespace wp-ns
 apiVersion: v1
 kind: Namespace

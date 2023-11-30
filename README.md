@@ -131,4 +131,4 @@ La configuration de l'Ingress Controller est une étape essentielle pour assurer
 Ce projet illustre comment Terraform et Kubernetes peuvent être utilisés ensemble pour déployer efficacement des applications sur AWS. Il démontre l'importance de la planification et de la configuration minutieuse pour assurer un déploiement réussi et sécurisé.
 
 
-Ce README.md fournit une vue d'ensemble complète de votre projet, en intégrant vos fichiers de code et en expliquant chaque étape du processus de déploiement. Il est conçu pour être à la fois informatif et facile à suivre pour quiconque souhaitant poursuivre ou contribuer à votre projet.
+

@@ -1,3 +1,8 @@
+# Ce fichier YAML crée un Service Kubernetes wordpress-service dans le namespace wp-ns. 
+# Le service, de type ClusterIP, est accessible uniquement à l'intérieur du cluster. 
+# Il expose le port 80, qui est mappé au même port sur les Pods cibles. 
+# Le service sélectionne les Pods avec l'étiquette app: wordpress.
+
 apiVersion: v1
 kind: Service
 metadata:

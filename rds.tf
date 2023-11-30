@@ -1,3 +1,9 @@
+# Ce code Terraform crée un groupe de sous-réseaux RDS et une instance RDS dans AWS. 
+# Le groupe de sous-réseaux chok-wordpress-db-subnet-group comprend les sous-réseaux privés spécifiés dans var.private_subnet_ids. 
+# L'instance RDS rds-mariadb utilise le stockage gp2, exécute MariaDB version 10.5 sur une instance db.t3.micro, et a une base de données wordpressdb. 
+# L'instance est configurée pour la haute disponibilité, conserve les sauvegardes pendant 7 jours, 
+# n'est pas accessible publiquement, et utilise le groupe de sécurité chok_sg_rds.
+
 # Fichier: rds.tf
 resource "aws_db_subnet_group" "chok_wordpress_db_subnet_group" { # Création d'un groupe de sous-réseaux pour RDS
   name       = "chok-wordpress-db-subnet-group"

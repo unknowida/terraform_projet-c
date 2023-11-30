@@ -1,3 +1,8 @@
+# Ce fichier YAML définit une règle d'Ingress pour Kubernetes. 
+# L'Ingress dirige le trafic HTTP vers le service wordpress-service dans le namespace wp-ns pour les hôtes wordpress.highazvendor.link et www.wordpress.highazvendor.link. 
+# Les annotations configurent le comportement de l'Ingress, notamment la redirection SSL et l'utilisation d'expressions régulières. 
+# Un certificat SSL spécifique est également défini pour le chiffrement TLS.
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:

@@ -1,3 +1,10 @@
+# Ce fichier YAML définit un déploiement Kubernetes pour WordPress dans le namespace `wp-ns`. 
+# Le déploiement maintient deux répliques de l'application WordPress. 
+# Chaque pod exécute un conteneur basé sur l'image `wordpress:latest` et expose le port 80. 
+# Les variables d'environnement sont utilisées pour configurer l'application WordPress, y compris les détails de la base de données. 
+# Le mot de passe de la base de données est stocké dans un Secret Kubernetes. 
+# Un volume est monté dans le conteneur au chemin `/var/www/html`, mappé à un chemin sur l'hôte, permettant la persistance des données.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
